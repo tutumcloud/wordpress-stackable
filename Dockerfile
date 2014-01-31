@@ -1,6 +1,4 @@
 FROM tutum/apache-php
-2014-01-31 23:40:20,195 WARN cElementTree not installed, using slower XML parser for XML-RPC
-FROM tutum/apache-php
 MAINTAINER Borja Burgos <borja@tutum.co>
 
 # Install packages
