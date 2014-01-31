@@ -2,10 +2,10 @@ FROM tutum/apache-php
 MAINTAINER Borja Burgos <borja@tutum.co>
 
 # Add wp-config with info for Wordpress to connect to DB
-ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-no-sql/master/wp-config.php /app/wp-config.php
+ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/wp-config.php /app/wp-config.php
 
 # Add script to create 'wordpress' DB
-ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-no-sql/master/create_db.sh create_db.sh
+ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/create_db.sh create_db.sh
 RUN chmod 755 /*.sh
 
 # Download latest version of Wordpress into /app
