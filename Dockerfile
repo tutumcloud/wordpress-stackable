@@ -5,7 +5,7 @@ MAINTAINER Borja Burgos <borja@tutum.co>
 ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/wp-config.php /app/wp-config.php
 
 # Add script to create 'wordpress' DB
-ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/create_db.sh create_db.sh
+ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/run.sh run.sh
 RUN chmod 755 /*.sh
 
 # Download latest version of Wordpress into /app
