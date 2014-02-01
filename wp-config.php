@@ -25,7 +25,7 @@ define('DB_USER', 'admin');
 define('DB_PASSWORD', getenv('DB_PASSWORD'));
 
 /** MySQL hostname */
-define('DB_HOST', getenv('DB_PORT_3306_TCP_ADDR'));
+define('DB_HOST', getenv('DB_PORT_3306_TCP_ADDR').":".getenv('DB_PORT_3306_TCP_PORT'));
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
