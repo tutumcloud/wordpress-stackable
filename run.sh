@@ -9,15 +9,18 @@ if [[ $# -eq 0 ]]; then
         exit 1
 fi
 
-echo "=> Creating database $1"
-RET=1
-while [[ RET -ne 0 ]]; do
-        sleep 5
-        mysql -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT -e "CREATE DATABASE $1"
-        RET=$?
-done
+TABLE_EXISTS=$(mysql -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT -e "USE $1")
 
-echo "=> Done!"
+if [[ TABLE_EXISTS -eq 1 ]]; then
+        echo "=> Creating database $1"
+        RET=1
+        while [[ RET -ne 0 ]]; do
+                sleep 5
+                mysql -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT -e "CREATE DATABASE $1"
+                RET=$?
+        done
+        echo "=> Done!"
+fi
+
 touch /.mysql_db_created
-
 exec supervisord -n
