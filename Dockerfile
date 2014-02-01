@@ -2,7 +2,9 @@ FROM tutum/apache-php
 MAINTAINER Borja Burgos <borja@tutum.co>
 
 # Install packages
-RUN apt-get -y install mysql-client
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y install supervisor mysql-client
 
 # Download latest version of Wordpress into /app
 RUN rm -fr /app && git clone https://github.com/WordPress/WordPress.git /app
@@ -11,7 +13,7 @@ RUN rm -fr /app && git clone https://github.com/WordPress/WordPress.git /app
 ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/wp-config.php /app/wp-config.php
 
 # Add script to create 'wordpress' DB
-ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/run.sh /run.sh
+ADD https://raw.github.com/tutumcloud/tutum-docker-wordpress-nosql/master/run.sh run.sh
 RUN chmod 755 /*.sh
 
 # Link app to /var/www for Apache

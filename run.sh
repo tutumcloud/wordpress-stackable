@@ -9,9 +9,9 @@ if [[ $# -eq 0 ]]; then
         exit 1
 fi
 
-DB_EXISTS=$(mysql -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT -e "SHOW DATABASES LIKE '"$1"';" | grep "$1" > /dev/null; echo "$?")
+TABLE_EXISTS=$(mysql -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT -e "USE $1")
 
-if [[ DB_EXISTS -eq 1 ]]; then
+if [[ TABLE_EXISTS -eq 1 ]]; then
         echo "=> Creating database $1"
         RET=1
         while [[ RET -ne 0 ]]; do
@@ -20,9 +20,6 @@ if [[ DB_EXISTS -eq 1 ]]; then
                 RET=$?
         done
         echo "=> Done!"
-
-        mysqladmin -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT shutdown
-
 fi
 
 touch /.mysql_db_created
