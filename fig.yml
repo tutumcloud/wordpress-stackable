@@ -1,0 +1,14 @@
+wordpress:
+  build: .
+  links: 
+   - db
+  ports:
+   - "80:80"
+  environment:
+    WORDPRESS_DB_NAME: wordpress
+    WORDPRESS_DB_USER: admin
+    WORDPRESS_DB_PASS: randpass
+db:
+  image: tutum/mysql
+  environment:
+    MYSQL_PASS: randpass
