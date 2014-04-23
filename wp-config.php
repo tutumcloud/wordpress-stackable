@@ -22,10 +22,10 @@ define('DB_NAME', getenv('WORDPRESS_DB_NAME'));
 define('DB_USER', 'admin');
 
 /** MySQL database password */
-define('DB_PASSWORD', getenv('DB_PASSWORD'));
+define('DB_PASSWORD', getenv('WORDPRESS_DB_PASS'));
 
 /** MySQL hostname */
-define('DB_HOST', getenv('DB_PORT_3306_TCP_ADDR').":".getenv('DB_PORT_3306_TCP_PORT'));
+define('DB_HOST', getenv('DB_1_PORT_3306_TCP_ADDR').":".getenv('DB_1_PORT_3306_TCP_PORT'));
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');

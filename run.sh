@@ -5,20 +5,36 @@ then
         exit 1
 fi
 
-DB_EXISTS=$(mysql -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT -e "SHOW DATABASES LIKE '"$WORDPRESS_DB_NAME"';" | grep "$WORDPRESS_DB_NAME" > /dev/null; echo "$?")
+for ((i=0;i<10;i++))
+do
+	DB_CONNECTABLE=$(mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASS -h$DB_1_PORT_3306_TCP_ADDR -P$DB_1_PORT_3306_TCP_PORT -e 'status' >/dev/null 2>&1; echo "$?")
+    if [[ DB_CONNECTABLE -eq 0 ]];
+	then
+		break
+	fi
+	sleep 5
+done
 
-if [[ DB_EXISTS -eq 1 ]]; 
-then
-        echo "=> Creating database $WORDPRESS_DB_NAME"
-        RET=1
-        while [[ RET -ne 0 ]]; do
-                sleep 5
-                mysql -uadmin -p$DB_PASSWORD -h$DB_PORT_3306_TCP_ADDR -P$DB_PORT_3306_TCP_PORT -e "CREATE DATABASE $WORDPRESS_DB_NAME"
-                RET=$?
-        done
-        echo "=> Done!"
+if [[ $DB_CONNECTABLE -eq 0 ]];
+then 
+	DB_EXISTS=$(mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASS -h$DB_1_PORT_3306_TCP_ADDR -P$DB_1_PORT_3306_TCP_PORT -e "SHOW DATABASES LIKE '"$WORDPRESS_DB_NAME"';" 2>&1 |grep "$WORDPRESS_DB_NAME" > /dev/null ; echo "$?")
+	
+	if [[ DB_EXISTS -eq 1 ]];
+	then
+		echo "=> Creating database $WORDPRESS_DB_NAME"
+		RET=$(mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASS -h$DB_1_PORT_3306_TCP_ADDR -P$DB_1_PORT_3306_TCP_PORT -e "CREATE DATABASE $WORDPRESS_DB_NAME")
+		if [[ RET -ne 0 ]];
+		then 
+			echo "Cannot create database for wordpress"
+			exit RET
+		fi
+		echo "=> Done!"	
+	else
+		echo "=> Skipped creation of database $WORDPRESS_DB_NAME – it already exists."
+	fi
 else
-        echo "=> Skipped creation of database $WORDPRESS_DB_NAME – it already exists."
+	echo "Cannot connect to Mysql"
+	exit $DB_CONNECTABLE
 fi
 
 touch /.mysql_db_created
