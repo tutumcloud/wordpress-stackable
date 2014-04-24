@@ -16,5 +16,9 @@ RUN chmod 644 /app/wp-config.php
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
+ENV WORDPRESS_DB_NAME wordpress
+ENV WORDPRESS_DB_USER admin
+ENV WORDPRESS_DB_PASS CHANGEME
+
 EXPOSE 80
 CMD ["/run.sh"]
