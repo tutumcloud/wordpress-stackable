@@ -16,6 +16,9 @@ RUN chmod 644 /app/wp-config.php
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
+# Modify permissions to allow plugin upload
+RUN chmod -R 777 /app/wp-content
+
 ENV WORDPRESS_DB_NAME wordpress
 ENV WORDPRESS_DB_USER admin
 ENV WORDPRESS_DB_PASS CHANGEME
