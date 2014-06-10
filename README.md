@@ -1,5 +1,5 @@
 tutum-docker-wordpress-nosql
-======================
+============================
 
 
 Out-of-the-box Wordpress docker image without MySQL
@@ -7,6 +7,24 @@ Out-of-the-box Wordpress docker image without MySQL
 
 Usage
 -----
+To create the image `tutum/wordpress-stackable`, execute the following command on the `tutum-docker-wordpress-nosql` folder:
+
+    docker build -t tutum/wordpress-stackable .
+
+To create a MySQL database:
+
+    docker run -d -e MYSQL_PASS='<your_password>' --name database -p 3306:3306 tutum/mysql:5.5
+
+To run Wordpress by linking to the database created above:
+
+    docker run -d --link database:DB  -e DB_PASS='<your_password>' -p 80:80 tutum/wordpress-stackable
+
+Now, you can use your web browser to access Wordpress from the the follow address:
+
+    `http://localhost/`
+
+Usage(Fig)
+----------
 
 To create the wordpress service, simply execute the following commands on the tutum-docker-wordpress-nosql folder:
 
@@ -21,8 +39,8 @@ The first time that you run Tutum wordpress service, a new MySQL container will 
 
 Done!
 
-Configuration
--------------------------------------------------
+Configuration(Fig)
+------------------
 
 Edit `fig.yml` to customize the wordpress service before running `sudo fig up`:
 
@@ -30,30 +48,33 @@ The default `fig.yml` shows as follow:
 
     wordpress:
       build: .
-      links: 
+      links:
        - db
       ports:
        - "80:80"
       environment:
-        WORDPRESS_DB_NAME: wordpress
-        WORDPRESS_DB_USER: admin
-        WORDPRESS_DB_PASS: randpass
+        DB_NAME: wordpress
+        DB_USER: admin
+        DB_PASS: "**ChangeMe**"
+        DB_HOST: "**LinkMe**"
+        DB_PORT: "**LinkMe**"
     db:
-      image: tutum/mysql
+      image: tutum/mysql:5.5
       environment:
-        MYSQL_PASS: randpass
+        MYSQL_PASS: "**ChangeMe**"
 	
 - Change the ports `"80:80"` to map to a different port number: e.g. `"8080:80"` will run wordpress at port `8080`.
 
-- Change the value of `WORDPRESS_DB_NAME`, `WORDPRESS_DB_USER`, `WORDPRESS_DB_PASS` credentials (name, username, password) to connect to MySQL.
+- Change the value of `DB_NAME`, `DB_USER`, `DB_PASS` credentials (name, username, password) to connect to MySQL.
 
 - Modify password of admin user in MySQL container by changing the value of `MYSQL_PASS`.
 
 - To use a MariaDB instead of MySQL, you can make the following changes to the `fig.yml` file:
 
         db:
-          image: tutum/mariadb 
+          image: tutum/mariadb:latest
           environment:
             MARIADB_PASS: randpass
-    And then, change `WORDPRESS_DB_PASS` to the same value as `MARIADB_PASS`.
+
+    And then, change `DB_PASS` to the same value as `MARIADB_PASS`.
 
