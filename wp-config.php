@@ -16,16 +16,16 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', getenv('WORDPRESS_DB_NAME'));
+define('DB_NAME', getenv('DB_NAME'));
 
 /** MySQL database username */
-define('DB_USER', 'admin');
+define('DB_USER', getenv('DB_USER'));
 
 /** MySQL database password */
-define('DB_PASSWORD', getenv('WORDPRESS_DB_PASS'));
+define('DB_PASSWORD', getenv('DB_PASS'));
 
 /** MySQL hostname */
-define('DB_HOST', getenv('DB_1_PORT_3306_TCP_ADDR').":".getenv('DB_1_PORT_3306_TCP_PORT'));
+define('DB_HOST', getenv('DB_HOST').":".getenv('DB_PORT'));
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');

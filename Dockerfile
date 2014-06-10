@@ -1,12 +1,12 @@
-FROM tutum/apache-php
-MAINTAINER Borja Burgos <borja@tutum.co>
+FROM tutum/apache-php:latest
+MAINTAINER Borja Burgos <borja@tutum.co>, Feng Honglin <hfeng@tutum.co>
 
 # Install packages
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-client
 
 # Download latest version of Wordpress into /app
-RUN rm -fr /app && git clone https://github.com/WordPress/WordPress.git /app
+RUN rm -fr /app && git clone --depth=1 https://github.com/WordPress/WordPress.git /app
 
 # Add wp-config with info for Wordpress to connect to DB
 ADD wp-config.php /app/wp-config.php
@@ -19,9 +19,12 @@ RUN chmod 755 /*.sh
 # Modify permissions to allow plugin upload
 RUN chmod -R 777 /app/wp-content
 
-ENV WORDPRESS_DB_NAME wordpress
-ENV WORDPRESS_DB_USER admin
-ENV WORDPRESS_DB_PASS CHANGEME
+# Expose environment variables
+ENV DB_HOST **LinkMe**
+ENV DB_PORT **LinkMe**
+ENV DB_NAME wordpress
+ENV DB_USER admin
+ENV DB_PASS **ChangeMe**
 
 EXPOSE 80
 CMD ["/run.sh"]
