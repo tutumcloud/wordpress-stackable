@@ -65,9 +65,9 @@ The default `fig.yml` shows as follow:
 	
 - Change the ports `"80:80"` to map to a different port number: e.g. `"8080:80"` will run wordpress at port `8080`.
 
-- Change the value of `DB_NAME`, `DB_USER`, `DB_PASS` credentials (name, username, password) to connect to MySQL.
+- Change the value of `DB_NAME`, `DB_PASS` credentials (name, password) to connect to MySQL. Value of `DB_USER` must be `admin` at this moment.
 
-- Modify password of admin user in MySQL container by changing the value of `MYSQL_PASS`.
+- Modify password of admin user in MySQL container by changing the value of `MYSQL_PASS`, must be the same value of `DB_PASS`.
 
 - To use a MariaDB instead of MySQL, you can make the following changes to the `fig.yml` file:
 
