@@ -41,7 +41,7 @@ if [[ $DB_CONNECTABLE -eq 0 ]]; then
             echo "Cannot create database for wordpress"
             exit RET
         fi
-        echo "=> Done!"    
+        echo "=> Done!"
     else
         echo "=> Skipped creation of database $DB_NAME – it already exists."
     fi
@@ -49,6 +49,10 @@ else
     echo "Cannot connect to Mysql"
     exit $DB_CONNECTABLE
 fi
+
+ln -sf /opt/wordpress/themes/* /app/wp-content/themes/
+ln -sf /opt/wordpress/plugins/* /app/wp-content/plugins/
+ln -sf /opt/wordpress/uploads/* /app/wp-content/uploads/
 
 touch /.mysql_db_created
 exec supervisord -n
