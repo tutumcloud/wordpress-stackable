@@ -17,7 +17,8 @@ ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
 # Modify permissions to allow plugin upload
-RUN chmod -R 777 /app/wp-content
+RUN chown -R www-data:www-data /usr/share/nginx/www/wp-content
+RUN chmod -R 755 /usr/share/nginx/www/wp-content
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
