@@ -51,4 +51,4 @@ else
 fi
 
 touch /.mysql_db_created
-exec supervisord -n
+exec /run.sh
