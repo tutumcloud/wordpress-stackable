@@ -7,6 +7,7 @@ Out-of-the-box Wordpress docker image without MySQL
 
 Usage
 -----
+
 To create the image `tutum/wordpress-stackable`, execute the following command on the `tutum-docker-wordpress-nosql` folder:
 
     docker build -t tutum/wordpress-stackable .
@@ -23,17 +24,16 @@ Now, you can use your web browser to access Wordpress from the the follow addres
 
     `http://localhost/`
 
-Usage(Fig)
-----------
+Usage (using fig)
+-----------------
 
 To create the wordpress service, simply execute the following commands on the tutum-docker-wordpress-nosql folder:
 
-    git clone https://github.com/tutumcloud/tutum-docker-wordpress-nosql.git
-    sudo fig up
+    fig up
 
 To install fig, use the following command:
 
-	sudo pip install -U fig
+    pip install -U fig
 
 The first time that you run Tutum wordpress service, a new MySQL container will be created, which will then be linked to the wordpress container. You can start using wordpress from your browser with `http://hostname:port/` (by default, you can access the service with `http://localhost/`)
 
@@ -42,7 +42,7 @@ Done!
 Configuration(Fig)
 ------------------
 
-Edit `fig.yml` to customize the wordpress service before running `sudo fig up`:
+Edit `fig.yml` to customize the wordpress service before running `fig up`:
 
 The default `fig.yml` shows as follow:
 
