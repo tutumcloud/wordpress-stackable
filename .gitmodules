@@ -1,0 +1,4 @@
+[submodule "WordPress"]
+	path = WordPress
+	url = https://github.com/WordPress/WordPress.git
+	tag = 3.9.2
