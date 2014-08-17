@@ -2,7 +2,9 @@ FROM tutum/apache-php:latest
 MAINTAINER Borja Burgos <borja@tutum.co>, Feng Honglin <hfeng@tutum.co>
 
 # Install packages
-RUN apt-get -yq install mysql-client
+RUN apt-get update && \
+  apt-get -yq install mysql-client && \
+  rm -rf /var/lib/apt/lists/*
 
 # Download latest version of Wordpress into /app
 RUN rm -fr /app
