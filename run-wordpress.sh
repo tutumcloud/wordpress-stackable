@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -f /.mysql_db_created ]; then
-        exec supervisord -n
+        exec /run.sh
         exit 1
 fi
 
@@ -40,6 +40,14 @@ if [[ $DB_CONNECTABLE -eq 0 ]]; then
         if [[ RET -ne 0 ]]; then
             echo "Cannot create database for wordpress"
             exit RET
+        fi
+        if [ -f /initial_db.sql ]; then
+            echo "=> Loading initial database data to $DB_NAME"
+            RET=$(mysql -u$DB_USER -p$DB_PASS -h$DB_HOST -P$DB_PORT $DB_NAME < /initial_db.sql)
+            if [[ RET -ne 0 ]]; then
+                echo "Cannot load initial database data for wordpress"
+                exit RET
+            fi
         fi
         echo "=> Done!"    
     else
