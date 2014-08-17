@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -f /.mysql_db_created ]; then
-        exec supervisord -n
+        exec /run.sh
         exit 1
 fi
 
