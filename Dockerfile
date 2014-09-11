@@ -6,6 +6,10 @@ RUN apt-get update && \
   apt-get -yq install mysql-client && \
   rm -rf /var/lib/apt/lists/*
 
+# Add permalink feature
+RUN a2enmod rewrite
+ADD wordpress.conf /etc/apache2/sites-enabled/000-default.conf
+
 # Download latest version of Wordpress into /app
 RUN rm -fr /app
 ADD WordPress/ /app
