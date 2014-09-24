@@ -14,7 +14,6 @@ ADD wordpress.conf /etc/apache2/sites-enabled/000-default.conf
 RUN rm -fr /app
 ADD WordPress/ /app
 ADD wp-config.php /app/wp-config.php
-RUN chown www-data:www-data /app -R
 
 # Add script to create 'wordpress' DB
 ADD run-wordpress.sh /run-wordpress.sh
