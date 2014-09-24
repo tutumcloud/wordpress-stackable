@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chown www-data:www-data /app/wp-content -R
+chown www-data:www-data /app -R
 
 if [ -f /.mysql_db_created ]; then
         exec /run.sh
