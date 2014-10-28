@@ -93,3 +93,7 @@ require_once(ABSPATH . 'wp-settings.php');
 define("FS_METHOD","direct");
 define("FS_CHMOD_DIR", 0777);
 define("FS_CHMOD_FILE", 0777);
+
+/** Allow https behind a reverse-proxy */
+if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+  $_SERVER['HTTPS']='on';
