@@ -2,11 +2,6 @@
 
 chown www-data:www-data /app -R
 
-if [ -f /.mysql_db_created ]; then
-        exec /run.sh
-        exit 1
-fi
-
 DB_HOST=${DB_PORT_3306_TCP_ADDR:-${DB_HOST}}
 DB_HOST=${DB_1_PORT_3306_TCP_ADDR:-${DB_HOST}}
 DB_PORT=${DB_PORT_3306_TCP_PORT:-${DB_PORT}}
@@ -16,14 +11,18 @@ if [ "$DB_PASS" = "**ChangeMe**" ] && [ -n "$DB_1_ENV_MYSQL_PASS" ]; then
     DB_PASS="$DB_1_ENV_MYSQL_PASS"
 fi
 
-echo "=> Trying to connect to MySQL/MariaDB using:"
+echo "=> Using the following MySQL/MariaDB configuration:"
 echo "========================================================================"
 echo "      Database Host Address:  $DB_HOST"
 echo "      Database Port number:   $DB_PORT"
 echo "      Database Name:          $DB_NAME"
 echo "      Database Username:      $DB_USER"
-echo "      Database Password:      $DB_PASS"
 echo "========================================================================"
+
+if [ -f /.mysql_db_created ]; then
+        exec /run.sh
+        exit 1
+fi
 
 for ((i=0;i<10;i++))
 do
