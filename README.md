@@ -22,6 +22,13 @@ Now, you can use your web browser to access Wordpress from the the follow addres
 
 The installation wizard will appear.
 
+Usage (in Tutum)
+----------------
+To run `wordpress-stackable` in tutum, simply run the following command:
+
+    tutum stack up --name wordpress
+
+You can then run `tutum service ps --stack wordpress` to find out the url of your wordpress stack.
 
 Usage (as a base image)
 -----------------------
@@ -37,25 +44,24 @@ If you want to use it as a base image to create your customized version of wordp
     ADD themes/ /app/wp-content/themes/
     ADD plugins/ /app/wp-content/plugins/
     ADD uploads/ /app/wp-content/uploads/
-    RUN chown www-data:www-data /app/wp-content -R
 
 
-Usage (using fig)
+Usage (using docker-compose)
 -----------------
 
-To launch wordpress using `fig`, simply execute the following command:
+To launch wordpress using `docker-compose`, simply execute the following command:
 
-    fig up -d
+    docker-compose up -d
 
 The first time that you run this command, a new MySQL container will be created, which will then be linked to the Wordpress container automatically. You can start using Wordpress from your browser at `http://localhost/`
 
 
-Configuration (using fig)
+Configuration (using docker-compose)
 -------------------------
 
-Edit `fig.yml` to customize the wordpress service before running `fig up`:
+Edit `docker-compose.yml` to customize the wordpress service before running `docker-compose up`:
 
-The default `fig.yml` shows as follow:
+The default `docker-compose.yml` shows as follow:
 
     wordpress:
       build: .
@@ -80,7 +86,7 @@ The default `fig.yml` shows as follow:
 
 - Modify password of admin user in MySQL container by changing the value of `MYSQL_PASS`, must be the same value of `DB_PASS`.
 
-- To use a MariaDB instead of MySQL, you can make the following changes to the `fig.yml` file:
+- To use a MariaDB instead of MySQL, you can make the following changes to the `docker-compose.yml` file:
 
         db:
           image: tutum/mariadb:latest
@@ -88,4 +94,3 @@ The default `fig.yml` shows as follow:
             MARIADB_PASS: randpass
 
     And then, change `DB_PASS` to the same value as `MARIADB_PASS`.
-
