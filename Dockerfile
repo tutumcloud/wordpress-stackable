@@ -1,26 +1,18 @@
 FROM tutum/apache-php:latest
 MAINTAINER Borja Burgos <borja@tutum.co>, Feng Honglin <hfeng@tutum.co>
 
-# Install packages
+ENV WORDPRESS_VER 4.1.1
+WORKDIR /
 RUN apt-get update && \
-  apt-get -yq install mysql-client && \
-  rm -rf /var/lib/apt/lists/*
+    apt-get -yq install mysql-client curl && \
+    rm -rf /app && \
+    curl -0L http://wordpress.org/wordpress-4.1.1.tar.gz | tar zxv && \
+    mv /wordpress /app && \
+    rm -rf /var/lib/apt/lists/*
 
-# Add permalink feature
-RUN a2enmod rewrite
-ADD wordpress.conf /etc/apache2/sites-enabled/000-default.conf
-
-# Download latest version of Wordpress into /app
-RUN rm -fr /app
-ADD WordPress/ /app
 ADD wp-config.php /app/wp-config.php
-
-# Add script to create 'wordpress' DB
-ADD run-wordpress.sh /run-wordpress.sh
-RUN chmod 755 /*.sh
-
-# Modify permissions to allow plugin upload
-RUN chmod -R 777 /app/wp-content
+ADD run.sh /run.sh
+RUN chmod +x /*.sh
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
@@ -31,4 +23,4 @@ ENV DB_PASS **ChangeMe**
 
 EXPOSE 80
 VOLUME ["/app/wp-content"]
-CMD ["/run-wordpress.sh"]
+CMD ["/run.sh"]
