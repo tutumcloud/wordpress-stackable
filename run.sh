@@ -21,8 +21,8 @@ echo "      Database Username:      $DB_USER"
 echo "========================================================================"
 
 if [ -f /.mysql_db_created ]; then
-        exec /run.sh
-        exit 1
+        source /etc/apache2/envvars
+        exec apache2 -D FOREGROUND
 fi
 
 for ((i=0;i<10;i++))
