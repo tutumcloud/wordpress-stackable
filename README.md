@@ -1,6 +1,6 @@
 tutum-docker-wordpress-nosql
 ============================
-
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
 
 Out-of-the-box Wordpress docker image which can be linked to MySQL.
 
@@ -79,7 +79,7 @@ The default `docker-compose.yml` shows as follow:
       image: tutum/mysql:5.5
       environment:
         MYSQL_PASS: "**ChangeMe**"
-	
+
 - Change the ports `"80:80"` to map to a different port number: e.g. `"8080:80"` will run wordpress at port `8080`.
 
 - Change the value of `DB_NAME`, `DB_PASS` credentials (name, password) to connect to MySQL. Value of `DB_USER` must be `admin` at this moment.
