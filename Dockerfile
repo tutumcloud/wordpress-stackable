@@ -1,12 +1,12 @@
 FROM tutum/apache-php:latest
 MAINTAINER Borja Burgos <borja@tutum.co>, Feng Honglin <hfeng@tutum.co>
 
-ENV WORDPRESS_VER 4.1.1
+ENV WORDPRESS_VER 4.2.2
 WORKDIR /
 RUN apt-get update && \
     apt-get -yq install mysql-client curl && \
     rm -rf /app && \
-    curl -0L http://wordpress.org/wordpress-4.1.1.tar.gz | tar zxv && \
+    curl -0L http://wordpress.org/wordpress-${WORDPRESS_VER}.tar.gz | tar zxv && \
     mv /wordpress /app && \
     rm -rf /var/lib/apt/lists/*
 
