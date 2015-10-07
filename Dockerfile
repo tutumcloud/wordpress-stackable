@@ -1,7 +1,7 @@
 FROM tutum/apache-php:latest
 MAINTAINER Borja Burgos <borja@tutum.co>, Feng Honglin <hfeng@tutum.co>
 
-ENV WORDPRESS_VER 4.2.2
+ENV WORDPRESS_VER 4.3.1
 WORKDIR /
 RUN apt-get update && \
     apt-get -yq install mysql-client curl && \
