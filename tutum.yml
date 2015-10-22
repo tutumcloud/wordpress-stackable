@@ -8,8 +8,6 @@ wordpress:
     DB_NAME: wordpress
     DB_USER: admin
     DB_PASS: "**ChangeMe**"
-    DB_HOST: "**LinkMe**"
-    DB_PORT: "**LinkMe**"
 db:
   image: tutum/mysql:5.5
   environment:
