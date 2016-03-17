@@ -1,5 +1,8 @@
-tutum-docker-wordpress-nosql
-============================
+tutum-docker-wordpress-Stackable
+================================
+
+**This image will be deprecated soon. Please use the docker official image:** https://hub.docker.com/_/wordpress/
+
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
 
 Out-of-the-box Wordpress docker image which can be linked to MySQL.
