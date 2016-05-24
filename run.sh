@@ -4,6 +4,9 @@ then
     unlink /var/www/html
     mkdir /var/www/html
     ln -s /app /var/www/html/$ROOT_PATH
+    sed -i "s/ROOT_PATH/\/$ROOT_PATH/g" /app/.htaccess
+else
+    sed -i "s/ROOT_PATH//g" /app/.htaccess
 fi
 
 chown www-data:www-data /app -R
