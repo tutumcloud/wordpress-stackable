@@ -23,6 +23,7 @@ ENV DB_PORT **LinkMe**
 ENV DB_NAME wordpress
 ENV DB_USER admin
 ENV DB_PASS **ChangeMe**
+ENV ROOT_PATH /
 
 EXPOSE 80
 VOLUME ["/app/wp-content"]

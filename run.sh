@@ -1,4 +1,10 @@
 #!/bin/bash
+if [ "$ROOT_PATH" != "/" ]
+then
+    unlink /var/www/html
+    mkdir /var/www/html
+    ln -s /app /var/www/html/$ROOT_PATH
+fi
 
 chown www-data:www-data /app -R
 chmod -R 777 /app/wp-content
